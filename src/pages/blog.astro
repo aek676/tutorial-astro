@@ -1,7 +1,11 @@
 ---
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
+const pageTitle = "Mi blog de Astro aprendizaje";
 ---
 
 <html lang="en">
@@ -11,18 +15,14 @@ import Header from "../components/Header.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Blog</title>
   </head>
-  <body>
-    <Header />
-    <h1>Mi blog de Astro aprendizaje</h1>
+  <BaseLayout pageTitle={pageTitle}>
     <p>Aquí es donde publicaré sobre mi viaje de aprendizaje Astro.</p>
     <ul>
-      <li><a href="/posts/post-1">Publicación 1</a></li>
-      <li><a href="/posts/post-2">Publicación 2</a></li>
-      <li><a href="/posts/post-3">Publicación 3</a></li>
+      {
+        allPosts.map((post: any) => (
+          <BlogPost title={post.frontmatter.title} url={post.url} />
+        ))
+      }
     </ul>
-    <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
-  </body>
+  </BaseLayout>
 </html>

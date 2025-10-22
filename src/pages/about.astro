@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Navigation from "../components/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
 
 const pageTitle = "Sobre mi";
@@ -51,41 +52,37 @@ const textCase = "uppercase";
     </style>
   </head>
   <body>
-    <Header />
-    <h1>{pageTitle}</h1>
-    <h2>... ¡y mi nuevo sitio Astro!</h2>
+    <BaseLayout pageTitle={pageTitle}>
+      <h2>... ¡y mi nuevo sitio Astro!</h2>
+      <p>He aquí algunos datos sobre mí:</p>
+      <ul>
+        <li>Me llamo {identity.firstName}.</li>
+        <li>
+          Vivo en {identity.country} y trabajo como {identity.occupation}.
+        </li>
+        {
+          identity.hobbies.length >= 2 && (
+            <li>
+              Dos de mis hobbies son: {identity.hobbies[0]} y{" "}
+              {identity.hobbies[1]}.
+            </li>
+          )
+        }
+      </ul>
+      <p>Mis habilidades son:</p>
+      <ul>
+        {skills.map((skill) => <li class="skill"> {skill} </li>)}
+      </ul>
 
-    <p>He aquí algunos datos sobre mí:</p>
-
-    <ul>
-      <li>Me llamo {identity.firstName}.</li>
-      <li>Vivo en {identity.country} y trabajo como {identity.occupation}.</li>
+      {happy && <p>!Estoy feliz de aprender Astro!</p>}
+      {finished && <p>!He terminado este tutorial!</p>}
       {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Dos de mis hobbies son: {identity.hobbies[0]} y{" "}
-            {identity.hobbies[1]}.
-          </li>
+        goal === 3 ? (
+          <p>Mi objetivo es terminar en 3 días.</p>
+        ) : (
+          <p>Mi objetivo no es terminar en 3 días.</p>
         )
       }
-    </ul>
-    <p>Mis habilidades son:</p>
-    <ul>
-      {skills.map((skill) => <li class="skill"> {skill} </li>)}
-    </ul>
-
-    {happy && <p>!Estoy feliz de aprender Astro!</p>}
-    {finished && <p>!He terminado este tutorial!</p>}
-    {
-      goal === 3 ? (
-        <p>Mi objetivo es terminar en 3 días.</p>
-      ) : (
-        <p>Mi objetivo no es terminar en 3 días.</p>
-      )
-    }
-    <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
+    </BaseLayout>
   </body>
 </html>
