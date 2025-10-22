@@ -21,12 +21,25 @@ h1 {
 }
 
 /* Estilos de la barra de navegación */
+.hamburger {
+  padding-right: 20px;
+  cursor: pointer;
+}
 
+.hamburger .line {
+  display: block;
+  width: 40px;
+  height: 5px;
+  margin-bottom: 10px;
+  background-color: #ff9776;
+}
+
+/* Estilos de la barra de navegación */
 .nav-links {
   width: 100%;
   top: 5rem;
   left: 48px;
-  background-color: #ff9776;
+background-color: #ff9776;
   display: none;
   margin: 0;
 }
@@ -62,6 +75,10 @@ h1 {
   .nav-links a {
     display: inline-block;
     padding: 15px 20px;
+  }
+
+  .hamburger {
+    display: none;
   }
 
 }
