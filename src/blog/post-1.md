@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: "Mi primera publicación en el blog"
 author: "Alumno de Astro"
 pubDate: 2025-10-21
